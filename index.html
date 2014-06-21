@@ -1,0 +1,274 @@
+<html>
+	<head>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript">
+        function overSectLink(){
+            $(this).children('img:first-child').css('display','none');
+            $(this).children('img:last-child').css('display','inline');
+        }
+            
+        function outSectLink(){
+             $(this).children('img:last-child').css('display','none');
+            $(this).children('img:first-child').css('display','inline');
+        }
+            
+        function handleImglinkClick(){
+            var id = $(this).attr('id');
+            var toHome = false;
+            switch(id){
+                case 'pushAlice':
+                    $('#ctxArea').load('alice.html');
+                    break;
+                case 'pushCode':
+                    $('#ctxArea').load('software.html');
+                    break;
+                case 'pushArt':  
+                    $('#ctxArea').load('art.html');
+                    break;
+                case 'pushBlog':
+                    window.open('http://valourai.tumblr.com','_blank');
+                    break;
+                default: // closing sections return to main
+                    $('#ctxArea').empty();
+                    toHome = true;
+                    break;
+            }
+            if(toHome){
+                $('#ctxArea').css('min-height','0px');
+                window.scroll(0,0);
+            }
+            else {
+            $('#ctxArea').css('min-height',(window.innerHeight-210)+'px');
+            window.scroll(0,460); }
+        }
+            
+           window.onload = function(){
+               $('.sectionImgLink').mouseover(overSectLink);
+                $('.sectionImgLink').mouseout(outSectLink); 
+               $('.sectionImgLink').click(handleImglinkClick);
+            };
+        </script>
+		<title>Valour Labs and Studio: v2 "h i k a r i"</title>
+		<style type="text/css">
+			body {
+				background-color:#a7aaae;
+                overflow-x:hidden;
+           /*     background-image:url('bigbg.png');
+                background-repeat:repeat; */
+			}
+    a {text-decoration:none; font-weight:bold; }
+            a:link {color:#7d5ccb; }   
+a:visited {color:#7d5ccb;} 
+a:hover {color:#ff2a43;}  /* mouse over link */
+a:active {color:#ff2a43;}  /* selected link */
+            
+			#main {
+				z-index:0;
+				position: absolute;
+				top:0;
+				left:0;
+			}
+            
+            #headerrow 
+            {
+                z-index:1;
+                position:absolute;
+                top:450px;
+				left:0;
+                height:210px;
+                width:100%;
+                background-image:url('hfillbgcomplex.png');
+            background-position: 840px 0px;
+            background-repeat:repeat;
+            }
+            
+            #ctxArea{
+            z-index:1;
+                position:absolute;
+                left:0;
+                top:660px;
+                width:100%;
+                border:none;
+                margin:0;
+                padding:0;
+                display:block;
+                font-family:Verdana;
+                font-size:0.9em;
+                overflow:visible;
+                padding-top:10px;
+                padding-bottom:30px;
+            }
+            
+            #ctxArea td{
+            font-family:Verdana;
+                font-size:0.9em;
+            vertical-align:top;
+            text-align:left;
+            }
+            
+            #projListCell h2{
+            border:none;
+            border-bottom:solid 1px #FFFFFF;
+            font-family:Georgia;
+            text-align:right;
+                font-variant:small-caps;
+                font-weight:bold;
+            }
+            
+             #galCell h3{
+            border:none;
+            border-bottom:solid 1px #FFFFFF;
+            font-family:Georgia;
+            text-align:right;
+                font-variant:small-caps;
+                font-weight:bold;
+            }
+            
+            .sideCtx {
+            width: 200px;
+            margin-left:50px;
+            display:inline-block;
+            border-right: double 4px #FFFFFF;
+            padding:10px;
+            text-align:center;
+                overflow:auto;
+            position:relative;
+                top:0;
+                left:0;
+            }
+            
+            .mainCtx {
+            position:relative;
+                top:0;
+                left:0;
+            display:inline-block;
+            padding:10px;
+                text-align:left;
+                 overflow:auto;
+                padding-bottom:100px;
+            }
+        
+            #footer{
+            z-index:2;
+                position:fixed;
+                height:32px;
+                width:100%;
+                background-color:#000000;
+                border:none;
+                bottom:0;
+                left:0;
+                font-family:Georgia;
+                font-size:14px;
+                text-align:center;
+                padding-top:2px;
+                display:block;
+                padding-top:4px;
+            }
+            
+            #footer td{
+             font-size:14px;
+                color:#FFFFFF;
+            }
+            
+            #footer table {width:100%; 
+             border:none;
+                border-top:dotted 3px #FFFFFF;
+            }
+            
+            .hfimg{
+            float:left;
+                display:inline;
+            padding:0;
+            margin:0;
+            }
+            
+            .sectionImgLink {
+            display:inline;
+            padding:0;
+            margin:0;
+            width:210px;
+            height:210px;
+            }
+            
+            
+            .sectionImgLink img:first-child{
+            padding:0;
+            margin:0;
+            display:inline;
+            float:left;
+                border:0;
+            }
+            
+            .sectionImgLink img:last-child{
+            padding:0;
+            margin:0;
+                display:none;
+                float:left;
+                border:0;
+            }
+            
+            .customAddthis {display:inline;}
+            
+            .customAddthis a{ display:inline; }
+            
+            .thumbnail {
+                border:1px solid #ff6640;
+                padding:7px;
+            margin:5px;
+                background-color:#000000;
+                    <!--#ff783d; -->
+            }
+		</style>
+	</head>
+	<body>
+		<img id="main" src="splash.png">
+		<div id="headerrow">
+            <div class="sectionImgLink" id="pushAlice">
+          
+            <img src="filmlink_Alice_positive.png">
+          <img src="filmlink_Alice_negative.png">  
+            </div>
+            <div class="sectionImgLink" id="pushCode">
+             
+                <img src="filmlink_code_positive.png">
+             <img src="filmlink_code_negative.png">  
+            </div>
+            <div class="sectionImgLink" id="pushArt">
+            
+                <img src="filmlink_art_positive.png">
+            <img src="filmlink_art_negative.png">    
+            </div>
+            <div class="sectionImgLink" id="pushBlog">
+             
+                <img src="filmlink_blog_positive.png">
+              <img src="filmlink_blog_negative.png">   
+            </div>
+        </div>
+        <div id="ctxArea">
+        </div>
+        <div id="footer">
+            <table>
+            <tr>
+                <td width="50%">
+                <b>Contact Alice</b> (516)-326-0181 : alice@valour.me
+                </td>
+                <td width="20%" align="right">
+                <b>Follow Alice</b>&nbsp;&nbsp;
+                </td>
+                <td width="30%">
+                        <!-- AddThis Follow BEGIN -->
+                    <div class="addthis_toolbox addthis_default_style">
+<a class="addthis_button_twitter_follow" addthis:userid="trory"></a>
+<a class="addthis_button_linkedin_follow" addthis:userid="aliceqwong"></a>
+<a class="addthis_button_tumblr_follow" addthis:userid="valourai"></a>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5197c38555ee286b"></script>
+<!-- AddThis Follow END -->
+                
+                </td>
+                </tr>
+            </table>
+        </div>
+	</body>	
+</html>

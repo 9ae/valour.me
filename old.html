@@ -1,0 +1,216 @@
+<html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<script type="text/javascript" src="ui/js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="ui/js/jquery-ui-1.9.2.custom.js"></script>
+		<script type="text/javascript" src="canvasCtrl.js"></script>
+		<script  type="text/javascript">
+var temp=null;
+var tagslist = [];
+var logowidth, logoheight;
+        function sellink(event, ui){
+            alert("selected "+ui);
+            };
+        
+        function ovrlink(evt){
+            $(this).addClass("ui-state-hover");
+        }
+        
+        function outlink(evt){
+            $(this).removeClass("ui-state-hover");
+            
+        }
+        
+        function golink(evt){
+            var what = $(this).attr("code");
+            var ca = $('#gator li.ui-state-active');
+            if(ca.length>0){
+                $(ca).removeClass('ui-state-active');
+            }
+            $(this).addClass('ui-state-active');
+	loadContent(what);
+        }
+
+	function loadContent(what){
+	if(what=='projects'){
+	$.get('xtrans.php',{k:what},function(data){
+	$('#content').html(data);	
+	$( "#accordion" ).accordion({heightStyle: "fill"}); });
+	}
+	else if(what=='gallery'){
+	$.get('xtrans.php',{k:what},function(data){
+	$('#content').html(data);
+	$('.thumbnail').mouseover( function(evt){ $(this).css('background-color','#FF8624');}	);
+	$('.thumbnail').mouseout( function(evt){ $(this).css('background-color','#eaeaea');}	);
+	$('.thumbnail').click(viewimg);
+	});
+	}
+	else if(what=='resume') {
+     window.open('resume.pdf','_blank');
+     
+	}
+	else if(what=='me'){
+     $('#content').load('alice.html');
+     
+	}
+	else {}
+
+	}
+
+	function fillTagCloud(){
+		$('#tagcloud label, a[code]').each(
+		function(i){ var s = $(this).text();
+		$(this).text(s.replace("_"," "));
+		 });
+	
+	
+	$( "#tagcloud" ).buttonset();
+	$('#tagcloud input[type=checkbox]').change(function(evt){
+	var id = $(this).attr('id');
+	var tag = id.replace("tag_","");
+	if($("#"+id+":checked").length!=0)
+		filtertag(tag,2);
+	else 
+		filtertag(tag,0);
+	 });
+	}
+    
+    function logoResize(){
+    var thisar = logowidth/logoheight;
+ var svgwidth = $('#svglogo').width();
+   var svgheight = $('#svglogo').height();
+    var svgar = svgwidth/svgheight;
+    var mult = 1.0;
+    if(thisar>svgar){
+        mult = logowidth/svgwidth;
+    }
+    else{
+        mult = logoheight/svgheight; 
+    }
+	console.log(mult);
+    svgwidth*=mult;
+    svgheight*=mult;
+    var viewboxstr = "0 0 "+svgwidth+" "+svgheight;
+     $('#svglogo').attr('width',svgwidth);
+     $('#svglogo').attr('height',svgheight);
+     $('#svglogo').attr('viewbox', viewboxstr);
+     $('#logogroup').attr('transform','scale('+mult+')');
+    
+}
+
+	function filtertag(tagname, mode){
+	switch(mode){
+	case 0:
+	// remove tag
+	var i = tagslist.indexOf(tagname);
+	tagslist.splice(i,1);
+	break;
+
+	case 1:
+	// select only this
+	tagslist = [];
+	tagslist.push(tagname);
+	break;
+
+	default:
+	// add tag
+	tagslist.push(tagname);
+	break;
+	}
+	var tagsel = null;
+	if (tagslist==0){
+	$('div.item').hide();
+		return;}
+	else if(tagslist==1)
+	{ tagsel = "a[code="+tagslist[0]+"]"; }
+	else {
+	tagsel = tagslist.join("],a[code=");
+	tagsel = "a[code="+tagsel+"]";
+	}
+	//console.log(tagsel);
+	$('div.item:has('+tagsel+')').show();
+	$('div.item:not(:has('+tagsel+'))').hide();
+	}
+
+function viewimg(evt){
+    $('#loadingtxt').show();
+	var imgurl = $(this).attr('src');
+	imgurl = imgurl.replace('th_','');
+	$('#lightimg').attr('src',imgurl);
+
+	$('#lightimg').load( function(evt){ 
+	var divwidth = $('#lightbox').width();
+	var pagewidth = window.innerWidth;
+	var leftpos = (pagewidth-divwidth)/2;
+	$('#lightbox').css('left',leftpos+'px');
+	$('#lightbox').show();
+    $('#loadingtxt').hide();
+    }
+	);
+	
+    var cap = $(this).next('.caption');
+    $('#lightcaption').html($(cap).html());
+	
+}
+        
+	window.onload=function(){
+                 
+     logowidth = $('#logobox').width()*0.9;
+    logoheight = $('#logobox').height()*0.9;
+     $('#logobox').load('valour_orange.svg',logoResize);
+                 
+                 $('#gator li').addClass("ui-widget-content ui-state-default");
+                 $('#gator li').mouseover(ovrlink).mouseout(outlink).click(golink);
+                 
+                 var num = (Math.floor($('#foot').height()/($('#gator li').length))-10)*0.75;
+               $('#gator li').height(num).css('font-size',(num*0.8)+'px');
+		$('#lightbox').click(function(evt){ $(this).hide(); });
+				//start canvas
+				ariInit("bgcanvas");
+				start();	
+				
+			};
+			
+		</script>
+		<title>Valour Studio and Lab</title>
+		<link href="ui/css/rebels/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<div id="canvasLay">
+			<canvas width="100%" height="76%" id="bgcanvas"></canvas>
+		</div>
+		<div id="content">
+		</div>
+<div id="lightbox">
+<img id="lightimg" />
+<div id="lightcaption">
+</div>
+
+<div id="contactdialog" title="Contact Me">
+    
+</div>
+
+<p align="center"><i>Click to close image view</i></p>
+</div>
+
+		<div id="foot">
+
+				<div id="title">
+					<div id="logobox"></div>
+					<div class="footnote"> For all artwork <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/" title="No Derivatives, Non Commercial"> <img alt="No Derivatives, Non Commercial" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/80x15.png" /></a>
+						<br />
+						For all code and research <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="Yes Derive if only share alike license, Non Commercial"> <img alt="Yes Derive if only share alike license, Non Commercial" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+						<br />
+						Contact <a href="mailto:alice@valour.me">Alice Q. Wong</a> </div>
+	</div>
+    <div id="navi">
+	<ol id="gator">
+    <li code="me">About Me</li>
+    <li code="resume">Resum&eacute;</li>
+    <li code="gallery">Gallery</li>
+</ol>
+					</div>
+			</div>
+	</body>
+</html>

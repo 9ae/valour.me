@@ -1,0 +1,71 @@
+<html>
+<head>
+<script language="JavaScript" type="text/javascript" src="flow/contentflow.js"></script>
+<script type="text/javascript" src="ui/js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+//var myflow = new ContentFlow('water',{circularFlow:true, visibleItems:3}); 
+
+
+$('#logobox').load('valour_orange.svg',logoResize);
+
+};
+
+function logoResize(){
+     var thiswidth = $(this).width();
+    var thisheight = $(this).height();
+    var thisar = thiswidth/thisheight;
+    console.log(thisar);
+ var svgwidth = $('#svglogo').width();
+   var svgheight = $('#svglogo').height();
+    var svgar = svgwidth/svgheight;
+    console.log(svgar);
+    var mult = 1.0;
+    if(thisar>svgar){
+        mult = thiswidth/svgwidth;
+    }
+    else{
+        mult = thisheight/svgheight;
+    }
+    svgwidth*=mult;
+    svgheight*=mult;
+    var viewboxstr = "0 0 "+svgwidth+" "+svgheight;
+     $('#svglogo').width(svgwidth);
+     $('#svglogo').height(svgheight);
+     $('#svglogo').attr('viewbox', viewboxstr);
+     $('#logogroup').attr('transform','scale('+mult+')');
+    
+}
+
+var myflow =null;
+
+function load(){
+$.get('xtrans.php',{k:'gallery'},function(data){
+$('#fillspace').html(data);
+myflow = new ContentFlow('water',{circularFlow:true, visibleItems:3}); 
+myflow._init();
+});
+}
+
+</script>
+</head>
+<body bgcolor="#989898">
+
+<div id="logobox" style="border:solid #ff00ff 1px; width:50%; height:20%;"></div>
+
+<!--
+<div class="ContentFlow" id="water">
+   <div class="loadIndicator"><div class="indicator"></div></div>
+<div class="preButton">PREV</div>
+            <div class="flow" id="fillspace"></div>
+
+            </div>
+           <div class="nextButton">NEXT</div>
+   <div class="globalCaption"></div>
+            <div class="scrollbar">
+<div class="slider">
+</div></div>
+        </div>
+-->
+</body>
+</html>

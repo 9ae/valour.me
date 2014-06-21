@@ -1,0 +1,165 @@
+<!--<?xml-stylesheet type="text/xsl" href="gallery.xslt"?>-->
+
+<gallery>
+<!-- template
+<tiny title="">
+<img actual="" />
+<date year="" month="" date="" />
+<about></about>
+<tags>
+    <tag name="" />
+</tags>
+<credits>
+<org name="" email="" url="" />
+</credits>
+</tiny>
+-->
+
+<!--
+<mist>
+    <tag name="Maya" />
+    <tag name="3d_model" />
+    <tag name="Photoshop" />
+    <tag name="flyer" />
+    <tag name="photo_manipulation" />
+</mist>
+-->
+<tiny title="Jamnitzer Replication">
+<img actual="325maya01.jpg" />
+<date year="2009" month="02" date="00" />
+<about>Model of a drawing by Wentzel Jamnitzer.</about>
+<tags>
+    <tag name="Maya" />
+    <tag name="3d_model" />
+</tags>
+<credits>
+<org name="Wentzel Jamnitzer" />
+</credits>
+</tiny>
+
+<tiny title="Saturn">
+<img actual="325maya02.jpg" />
+<date year="2009" month="02" date="00" />
+<about>Jamnitzer style model.</about>
+<tags>
+    <tag name="Maya" />
+    <tag name="3d_model" />
+</tags>
+<credits>
+</credits>
+</tiny>
+
+<tiny title="Interlinked">
+<img actual="325maya03.png" />
+<date year="2009" month="04" date="00" />
+<about>Computers and Sculptures midterm project</about>
+<tags>
+    <tag name="Maya" />
+    <tag name="3d_model" />
+</tags>
+<credits>
+</credits>
+</tiny>
+
+<tiny title="A Piece of Home">
+    <img actual="lampshade.png" />
+    <date year="2012" month="11" date="00" />
+    <about>Turned a $10 IKEA lamp into something beautiful. Materials used: cardboard knife, acrylic paint, pencil, and lots of patience.</about>
+    <tags>
+        <tag name="3d" />
+        <tag name="knife_cuts" />
+        <tag name="traditional" />
+    </tags>
+    <credits>
+            <org name="IKEA" url="http://ikea.com/" />
+    </credits>
+</tiny>
+
+<tiny title="LGBTQ Trivia Night">
+<img actual="cha_lgbt.jpg" />
+<date year="2011" month="11" date="00" />
+<about></about>
+<tags>
+    <tag name="Photoshop" />
+    <tag name="flyer" />
+</tags>
+<credits>
+<org name="Stock Exchange" url="http://sxc.hu/" />
+</credits>
+</tiny>
+
+<tiny title="PHD Comics Movie">
+<img actual="gso_phdmovie1.jpg" />
+<date year="2011" month="10" date="00" />
+<about>Flyer's for the Stony Brook's graduate student organization</about>
+<tags>
+    <tag name="Photoshop" />
+    <tag name="flyer" />
+</tags>
+<credits></credits>
+</tiny>
+
+<tiny title="Irving Haunted House">
+<img actual="irv_haunted.png" />
+<date year="2008" month="10" date="00" />
+<about>Disclaimer: All rights belong to the copyright owners of the films. No profit was made by this poster. </about>
+<tags>
+    <tag name="Photoshop" />
+    <tag name="flyer" />
+</tags>
+<credits></credits>
+</tiny>
+
+<tiny title="K'nex Racer Build off">
+<img actual="irv_knex1.png" />
+<date year="2009" month="04" date="00" />
+<about>
+    Disclaimer: No profit was gained from this poster, and rights of the featured K'NEX images beyong to the owners of the K'NEX franchise.
+</about>
+<tags>
+    <tag name="Photoshop" />
+    <tag name="flyer" />
+</tags>
+<credits></credits>
+</tiny>
+
+<tiny title="K'nex Racer Build off">
+<img actual="irv_knex2.png" />
+<date year="2009" month="04" date="00" />
+<about>
+Disclaimer: No profit was gained from this poster, and rights of the featured K'NEX images beyong to the owners of the K'NEX franchise.
+</about>
+<tags>
+    <tag name="Photoshop" />
+    <tag name="flyer" />
+</tags>
+<credits></credits>
+</tiny>
+
+<tiny title="Mendelsohn 2008 Photoshop Contest Entry 1">
+<img actual="psc1.png" />
+<date year="2008" month="11" date="00" />
+<about></about>
+<tags>
+    <tag name="Photoshop" />
+    <tag name="photo_manipulation" />
+</tags>
+<credits>
+<org name="Stock Exchange" url="http://sxc.hu/" />
+</credits>
+</tiny>
+
+<tiny title="Mendelsohn 2008 Photoshop Contest Entry 2">
+<img actual="psc2.jpg" />
+<date year="2008" month="11" date="00" />
+<about>1st place winning entry</about>
+<tags>
+    <tag name="Photoshop" />
+    <tag name="photo_manipulation" />
+</tags>
+<credits>
+<org name="Stock Exchange" url="http://sxc.hu/" />
+</credits>
+</tiny>
+
+</gallery>

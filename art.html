@@ -1,0 +1,104 @@
+<table border=0 width="100%">
+    <tr><td width="200" style="text-align:center">
+       
+<a href="#3d">3D Model</a><br /><br />
+
+<a href="#ad">Advertisement</a><br /><br />
+
+<a href="#algo">Algorithmic Art</a><br /><br />
+
+<a href="#craft">Hand Crafts</a><br /><br />
+
+<a href="#music">Music</a><br /><br />
+
+<a href="#lit">Writing</a><br /><br />
+        </td>
+        <td id="galCell" width="*">
+
+<p align="center">Here is a place for all the non-software stuff, I do for leisure.</p>
+
+<h3>3D Model</h3>
+<a name="3d"></a>
+<blockquote>Geometric models made in Maya during the Spring of 2009.</blockquote>
+<div id="load3d"></div>
+            
+<h3>Advertisement</h3>
+<a name="ad"></a>
+<blockquote>Flyers made during college from my involvement with school organizations and clubs. Primarily for Irving Hall Council, Chapin Apartment Residents Association, and as a Graduate Resident Assistant. <br />
+Disclaimer:  All rights resigned back to the copyright owners of the images used. No profit was made from these flyers. 
+</blockquote>
+<div id="loadads"></div>
+
+<h3>Algorithmic Art</h3>
+<a name="algo"></a>
+<blockquote>What is more exciting than the unknown? Here are some algorithms, I wrote to generate images on the fly.</blockquote>
+<a href="http://www.tux.valour.me/aa/isquares.html" target="_blank"><img src="/gal/th_isquares.png" alt="Intuitive squares" class="thumbnail"></a>
+<a href="http://www.tux.valour.me/akiyoshi/web-export/" target="_blank"><img src="/gal/th_akiyoshi.png" alt="Akiyoshi Illusion" class="thumbnail"></a>
+<a href="http://jsfiddle.net/arix/RVW3k/embedded/result/" target="_blank"><img src="/gal/th_koch.png" alt="Koch snowflake animation" class="thumbnail"></a>
+            
+<h3>Hand Crafts</h3>
+<a name="craft"></a>
+<blockquote>Odd and ends of non-digital projects</blockquote>
+<div id="loadcrafts"></div>
+            
+<h3>Music</h3>
+<a name="music"></a>
+<blockquote>Truthfully, I dislike playing instruments in general, but I rather enjoy writing music.</blockquote>
+<p><b>Pillow Flight</b> [<a target="_blank" href="/music/pillowfight.pdf">music score</a>] [<a target="_blank" href="/music/pillowfight.mid">midi demo</a>]
+<br />
+Written <i>October 2010</i>, a song for the <i>piano</i>. The midi demo is not really good, muScore's midi generation from the sheet music
+    doesn't quiet capture the accents in the song. I should try to make a better rendition of this song some time. 
+    Another item on my "TO-LEARN" list: Digital Audio Synthesis.
+    
+</p>
+            
+<h3>Writing</h3> 
+<a name="lit"></a>
+<blockquote>Back in middle and high school, I used to read and write a lot. With classes and work, it fell off to the side during college.
+But since moving down to Virginia, due to the lack of meaningful social interactions and intellectually stimulation conversation, I started to pick up my more literary interest again.
+</blockquote>
+
+<p><b>Legend of the Boundless Birds</b> is a <i>short story</i> written in April 2013 about a bluejay, who could not fly.<br />
+Genre(s): Fairytale, fable <br />
+Status: <a href="http://valourai.tumblr.com/post/50877075302/legend-of-the-boundless-birds-v3-0" target="_blank">Draft 3</a>
+</p>
+        </td>
+        </tr>
+     </table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script type="text/javascript">
+var m3d = [{title: "Jamnitzer Replication",file:"325maya01.jpg"},
+           {title: "Saturn", file: "325maya02.jpg"},
+           {title: "Interlinked", file: "325maya03.png"}];
+var ads = [{title:"LGBTQ Trivia Night" , file: "cha_lgbt.jpg"},
+          {title:"Irving Haunted House" , file: "irv_haunted.png"},
+           {title:"K'nex Racer Build off" , file: "irv_knex1.png"},
+           {title:"Mendelsohn 2008 Photoshop Contest Entry 1" , file: "psc1.png"},
+           {title:"Mendelsohn 2008 Photoshop Contest Entry 2" , file: "psc2.jpg"}
+          ];
+var crafts = [{title:"Cityscape Lampshade" , file: "lampshade.png"},
+           {title:"Piggy Bank" , file: "piggybank.jpg"} ];
+var dir = "/gal/";
+
+    function loadTh(layid, aria){
+    var len = aria.length;
+        for(var i=0; i<len; i++){
+            var img  = $('<img class="thumbnail"/>');
+            img.attr('src',dir+'th_'+aria[i].file);
+            img.attr('alt',aria[i].title);
+            var a = $('<a target="_blank"></a>');
+            a.attr('href',dir+aria[i].file);
+            a.append(img);
+             $('#'+layid).append(a);
+        }
+    }
+    
+    loadTh('loadcrafts',crafts);
+    loadTh('load3d',m3d);
+    loadTh('loadads',ads);
+    
+    $('.thumbnail').mouseover(function(){$(this).css('background-color','#ff783d');});
+    $('.thumbnail').mouseout(function(){$(this).css('background-color','#000000');});
+</script>

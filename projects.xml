@@ -1,0 +1,218 @@
+<!--<?xml-stylesheet type="text/xsl" href="projects.xslt"?>-->
+<big>
+<!-- Project Template
+	<project title="">
+		<url></url>
+		(<preview></preview>)
+		<status></status>
+		<tags></tags>
+		<about></about>
+		(<collab>
+			<person name="" email="" url="" />
+	</collab>)
+		(<boss>
+			<person name="" email="" url="" />
+		</boss>)
+		<credits>
+			<pal name="" url=""></pal>
+		</credits>
+	</project>
+-->
+
+	<project title="PyView">
+		<status>Live</status>
+		<tags>
+			<tag name="software" />
+			<tag name="Python" />
+           		<tag name="commission" />
+		</tags>
+		<about>
+    	 Pyview is a framework for designing conditioning experiments. It was a software I for the Neurology Department of Stony Brook University.
+          While the code is open source, all rights are reserved by the university.
+    	 </about>
+         <more>
+         The experimenter can define behaviors to detect and positive/negative
+         rewards during different intervals of time through a graphical user interface. The experiment paradigm is stored 
+         </more>
+		<collab>
+			<person name="Anupam Gogar" />
+		</collab>
+		<boss>
+			<person name="Giancarlo LaCamera" url="http://neurobiology.informatics.sunysb.edu/graduate/faculty/lacamera.html" />
+			<person name="Lucinda Davis" />
+		</boss>
+		<credits>
+			<person name="wxPython" url="">GUI controls</person>
+			<person name="matplotlib" url="">live plotting library</person>
+			<person name="Pearu Peterson" url="http://pylibnidaqmx.googlecode.com/">PyLibNIDAQmx, Python wrapper to libnidaqmx library</person>
+		</credits>
+	</project>
+	
+    <!--
+	<project title="Halftoner">
+		<url></url>
+		<status></status>
+		<tags></tags>
+		<about></about>
+		<collab>
+			<person name="" email="" url="" />
+		</collab>
+		<boss>
+			<person name="" email="" url="" />
+		</boss>
+		<credits>
+			<pal name="" url=""></pal>
+		</credits>
+	</project>
+    -->
+	
+	<project title="Word Art">
+		<url>http://www.tux.valour.me/wordart/</url>
+		<status>Alpha</status>
+		<tags>
+    	 <tag name="indie" />
+         <tag name="image_processing" />
+         <tag name="HTML_5" />
+         <tag name="Javascript" />
+         <tag name="PHP" />
+         <tag name="software" />
+		</tags>
+		<about>
+    	 Inspired by a highschool art project which took weeks to complete, but only takes 20 minutes on Photoshop. 
+         This is a dynamic implementation of that project.   
+		</about>
+		<collab>
+		</collab>
+		<boss>
+		</boss>
+		<credits>
+		</credits>
+	</project>
+	<!--
+	<project title="Dolly">
+		<status>Revision</status>
+		<tags>
+    	 <tag name="WebGL" />
+         <tag name="HTML_5" />
+         <tag name="indie" />
+         <tag name="3d_graphics" />
+         <tag name="Javascript" />
+         <tag name="software" />
+		</tags>
+		<about>Lightweight virtual drawing mannequin.</about>
+		<collab>
+		</collab>
+		<boss>
+		</boss>
+		<credits>
+		</credits>
+	</project> -->
+	
+		<project title="Geometry Spy">
+		
+		<status>Live</status>
+		<tags>
+    	 <tag name="HTML_5" />
+         <tag name="commission" />
+         <tag name="game_design" />
+         <tag name="Javascript" />
+         <tag name="software" />
+		</tags>
+		<about>
+    	 An survey in the format of a point-and-shoot game to measure people's perceptions of geometric properties. 
+    	 At the moment, KineticJs library is behaving weirdly on Chrome. Please view the demo in Firefox.   
+		</about>
+		<collab>
+		</collab>
+		<boss>
+        <person name="Lori Scarlatos" url="http://ms.cc.sunysb.edu/~lscarlatos/" />
+		</boss>
+		<credits>
+			<person name="KineticJs" url="http://kineticjs.com/" />
+		</credits>
+	</project>
+	
+	<project title="Intelligent Energy Choices">
+		<url>http://ms.cc.sunysb.edu/~lscarlatos/IEC/index.html</url>
+		<status>Live</status>
+		<tags>
+    	   <tag name="commission" />
+           <tag name="Flash" />
+           <tag name="ActionScript" />
+           <tag name="game_design" />
+           <tag name="software" />
+		</tags>
+		<about>A simulation game where the player becomes the leader of a country and is responsible for the energy usage of his/her country.
+        The purpose of this game is to show how economy, energy, and environmental changes are related. 
+		</about>
+		<collab>
+            <person name="Lori Scarlatos" url="http://ms.cc.sunysb.edu/~lscarlatos/" />
+		</collab>
+		<boss>
+			<person name="Lori Scarlatos" url="http://ms.cc.sunysb.edu/~lscarlatos/" />
+		</boss>
+		<credits>
+		</credits>
+	</project>
+	
+	<!--	<project title="Alice by Alice">
+		<status>Hiatus</status>
+		<tags>
+    	 <tag name="voice_acting"  />
+          <tag name="indie" />
+		</tags>
+		<about>
+    	 Reading of Lewis Carroll's <u>Alice's Adventures in Wonderland </u>
+		</about>
+		<collab>
+		</collab>
+        <boss></boss>
+		<credits>
+			<person name="Lewis Carroll" />
+		</credits>
+	</project> -->
+	
+		<project title="Alignment Correction of the Cathode Strip Chamber in ATLAS Detector">
+		<url>http://valour.me/bnlposter.pdf</url>
+		<status>Complete</status>
+		<tags>
+    	 <tag name="research" />
+         <tag name="physics" />
+         <tag name="commission" />
+		</tags>
+		<about>Summer 2010, I was part of Brookhaven National Labs' SULI program.
+        My project was do to data analysis for the CSC component of the ATLAS detector, 
+        one of the four detectors located at the LHC.</about>
+		<collab>
+			<person name="Kyoko Yamamoto" />
+		</collab>
+		<boss>
+			<person name="David Adams" />
+		</boss>
+		<credits>
+			<person name="ROOT Library" url="http://root.cern.ch" />
+		</credits>
+	</project>
+	
+		<project title="The Sentence of Reed Wright">
+		<status>Hiatus</status>
+		<tags>
+    	 <tag name="animation" />
+         <tag name="3d_model" />
+         <tag name="indie_game" />
+		</tags>
+		<about>
+    	 Animated short about a man named Reed Wright sentenced to a life as the read-write pointer in a Turing Machine.
+         The narration features lines from Oscar Wilde's "Ballad of Reading Gaol". 
+         Originally prototyped in 2009 in for a multimedia course. But I wanted to revise and refine this project into something I myself can be proud of making.
+		</about>
+		<collab>
+			<person name="Constantine Angelos" />
+	</collab>
+		<boss>
+		</boss>
+		<credits>
+			<person name="Oscar Wilde" />
+		</credits>
+	</project>
+</big>

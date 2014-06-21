@@ -1,0 +1,137 @@
+    <table border=0 width="100%">
+    <tr><td width="200" style="text-align:center">
+        <B>Filter by tags</B> <br />
+        
+        <a href="#tag">Android</a> <br />
+        <a href="#tag">C++</a> <br/>
+        <a href="#tag">&lt;canvas&gt;</a><br/>
+        <a href="#tag">Django</a><br />
+        <a href="#tag">HTML5</a> <br/>
+        <a href="#tag">Javascript</a><br/>
+        <a href="#tag">OpenGL</a> <br/>
+        <a href="#tag">PHP</a><br/>
+        <a href="#tag">Python</a><br />
+        
+        <p><a href="#" onclick="unfilterAll(); return false;">SHOW ALL PROJECTS</a></p>
+        </td>
+        <td id="projListCell" width="*">
+        <h2>Current Project</h2>
+
+<p>
+    <b>Bowls</b> [<a href="https://play.google.com/store/apps/details?id=me.valour.bowls" target="_blank">@Play store</a>][<a href="https://github.com/algobunny/Bowls" target="_blank">source code</a>]
+    [<a href="http://valourai.tumblr.com/tagged/AndroidDev" target="_blank">project log</a>]
+    <br />
+    <i>March 2014</i> Bill splitting app. <br />
+    Tags: <a href="#tag">Java</a>
+    <a href="#tag">Android</a>
+</p>
+
+<p>
+    <b>Abstract Experiment Designer</b>
+    [<a href="https://github.com/algobunny/aed-web" target="_blank">UI source code</a>]
+    [<a href="https://github.com/algobunny/aedsdk" target="_blank">SDK source code</a>] <br />
+    <i>August 2013</i> Re-envision of PyView to be more flexible and mutli-platform support.<br />
+    Tags: <a href="#tag">Python</a>
+    <a href="#tag">Django</a>
+</p>
+
+<p>
+    <b>Fan Ocean</b> [<a href="http://valourai.tumblr.com/tagged/fanocean" target="_blank">project log</a>]<br />
+    <i>May 2013</i> The social network for fandoms, a platform to encourage users create fanworks, engage in discourse, and meet other 
+    fans who share their unique hobbies and interests. <br />
+    Tags: <a href="#tag">Javascript</a>
+    <a href="#tag">PHP</a>
+    <a href="#tag">Ruby</a>
+</p>
+
+<h2>Previous Projects</h2>
+            
+<p>
+    <b>Shade Me with Words</b>
+    [<a href="http://tux.valour.me/wordart" target="_blank">demo</a>]
+    [<a href="https://github.com/algobunny/wordart" target="_blank">source code</a>] <br />
+    <i>April 2013</i> A month by hand, 20 minutes in Photoshop, and 5 minutes on code. <br />
+    Tags: <a href="#tag">HTML5</a>
+        <a href="#tag">Javascript</a>
+        <a href="#tag">PHP</a>
+        <a href="#tag">&lt;canvas&gt;</a>
+</p>            
+
+<p>
+    <b>PyView</b>
+    [<a href="https://github.com/algobunny/PyView" target="_blank">source code</a>] <br />
+    <i>August 2012</i> PyView is a framework for designing experiments protocols, developed for 
+    Stony Brook University's Neurology Department<br />
+    Tags: <a href="#tag">Python</a>
+</p>
+
+
+     <p>
+    <b>The Spark still Tries</b>
+    [<a href="http://www.tux.valour.me/spark/" target="_blank">demo</a>]
+    [<a href="https://github.com/codebunny/Spark" target="_blank">source code</a>] <br />
+    <i>March 2012</i> An experiment to test game play difficulty as it is increased within a single level. <br />
+    Tags: <a href="#tag">HTML5</a>
+        <a href="#tag">Javascript</a>
+        <a href="#tag">&lt;canvas&gt;</a>
+</p>
+            
+
+<p>
+    <b>Virtual Drawing Mannequin in WebGL</b>
+    [<a href="http://tux.valour.me/vm" target="_blank">demo</a>]
+    [<a href="https://github.com/codebunny/dollyweb" target="_blank">source code</a>] <br />
+    <i>December 2010</i> Lightweight virtual drawing mannequin.<br />
+    Tags: <a href="#tag">HTML5</a>
+        <a href="#tag">Javascript</a>
+        <a href="#tag">&lt;canvas&gt;</a>
+        <a href="#tag">WebGL</a>
+</p>
+            
+<p>
+    <b>Virtual Drawing Mannequin in OpenGL</b>
+    [<a href="https://github.com/codebunny/dollyc" target="_blank">source code</a>] <br />
+    <i>May 2010</i> Lightweight virtual drawing mannequin. <br />
+    Tags: <a href="#tag">C++</a>
+    <a href="#tag">OpenGL</a>
+</p>
+        
+        </td>
+        </tr>
+    </table>
+
+<!--
+<p>
+    <b>{name}</b>
+    [<a href="" target="_blank">demo</a>]
+    [<a href="" target="_blank">source code</a>] <br />
+    <i>{date}</i> {description} <br />
+    Tags: <a href="#tag"></a>
+</p>
+-->
+
+<script type="text/javascript">
+function filterByTag(){
+    var tagName = $(this).text();
+    $('#projListCell p').each(
+    function(){ 
+    if($(this).has('a[href="#tag"]:contains("'+tagName+'")').length>0){
+        $(this).show();
+        console.log("to show ");
+    }
+    else {
+    $(this).hide();
+        console.log("to hide ");
+    }
+    }
+    );
+    return false;
+}
+    
+function unfilterAll(){
+    $('#projListCell p').show();
+    return false;
+}
+
+$('a[href="#tag"]').click(filterByTag);
+</script>
