@@ -1,59 +1,60 @@
-document.getElementById('sora').width = window.innerWidth;
-document.getElementById('sora').height = window.innerHeight;
+/* helper functions */
 
 function random(min,max){
     return Math.floor((Math.random() * max) + min);
 }
 
-var stage = new createjs.Stage('sora');
 
-function tick(evt){
-    stage.update();
+/* global variables */
+var settings = {
+	screen_width : window.innerWidth,
+	screen_height : window.innerHeight,
+	jar_width: 0,
+	jar_height: 0,
+	jar_padding: 0 
+};
+var jars = [];
+var stars = [];
+
+/* objects */
+function Jar(options){
+	this.title = options.title ||  "";
+	this.url = options.url || "";
+	this.x = options.x || 0;
+	this.y = options.y || 0;
+	this.dom = options.dom || null;
 }
 
-var Xing = {
-    minRadius : Math.round(Math.min(window.innerWidth,window.innerHeight)*0.08),
-    maxRadius: Math.round(Math.min(window.innerWidth,window.innerHeight)*0.14),
-    make: function(x,y){
-        var star = new createjs.Shape();
-        var rad = random(Xing.minRadius,Xing.maxRadius);
-        console.log(x+","+y+" "+rad);
-        star.graphics.beginFill("white").drawPolyStar(x,y,rad,5,0.43,0);
-        return star;
-    }
-};
+/* functions */
+function setSizes(){
+	settings.screen_width = window.innerWidth;
+	settings.screen_height = window.innerHeight;
+	settings.jar_width = settings.screen_width*0.28;
+	settings.jar_padding = settings.screen_width*0.4;
+}
 
-var Box = {
-    width: (function(){ return window.innerWidth*0.24; })(),
-    padding: (function(){ return window.innerWidth*0.07; })(),
-    createAll: function(){
-        var boxes = [];
-        var h = 100;
-        var y = window.innerHeight - h/2;
-        for(var i=0; i<3; i++){
-            var x = Box.padding+(i*(Box.padding+Box.width));
-            var rect = new createjs.Shape;
-            rect.graphics.beginFill('black').drawRect(x,y,Box.width,h);
-        
-            boxes.push(rect);
-            stage.addChild(rect);
-            
-            rect.addEventListener('click',function(evt){ 
-                createjs.Tween.get(rect).to({y:0}, 1000, createjs.Ease.linear).call(tick);
-              //  createjs.Tween.get(rect).to({y:window.innerHeight-h}, 1000);
-            });
-        }
-        return boxes;
-    }
-};
+/* intialize */
+(function(){
+	var jqxhr = $.getJSON( "jars.json", function() {
+ 	 console.log( "success" );
+	})
+  .done(function() {
+    console.log( "second success" );
+  })
+  .fail(function() {
+    console.log( "error" );
+  })
+  .always(function() {
+    console.log( "complete" );
+  });
+ 
+// Perform other work here ...
+ 
+// Set another completion function for the request above
+	jqxhr.complete(function() {
+		console.log( "second complete" );
+	});
+	setSizes();
+})();
 
-/*
-for(var i=0; i<10; i++){
-    stage.addChild(Xing.make(random(0,window.innerWidth),random(0, window.innerHeight)));
-}*/
-
-var boxes = Box.createAll();
-createjs.Ticker.addEventListener("tick", tick);
-
-stage.update();
-
+window.onresize = setSizes();
