@@ -4,7 +4,62 @@
         margin: 0px;
       }
       body {
-        background-color: transparent;
         -webkit-transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
         -webkit-transform-style: preserve-3d;
+        
+        overflow:hidden;
+                   background: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0, #29173f),
+	color-stop(0.13, #321742),
+	color-stop(0.25, #402254),
+	color-stop(0.5, #471d4d),
+	color-stop(0.75, #633252),
+	color-stop(0.86, #7c394b),
+	color-stop(1, #e96131)
+);/* TODO: update according to top spec
+background: -o-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+background: -moz-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+background: -webkit-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+background: -ms-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+background: linear-gradient(to bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+            */  
       }
+      
+ img.jar {
+    display:inline;
+    position:relative;
+    z-index:500;
+}
+
+#jars_layer{
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+
+#stars_layer{
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+#star_detail{
+    display:none;
+    margin:10%;
+    width:80%;
+height:80%;
+    background-color:#fff; /*rgba(255,255,255,0.8); */
+border-color:rgba(255,255,255,0.8);
+border-style:solid;
+border-size:8px;
+border-radius:20px;
+z-index:1000;
+}
+
+#star_detail button.close {
+ float:right;
+}

@@ -2,22 +2,339 @@
 <html>
   
   <head data-gwd-animation-mode="proMode">
-  <script type="text/javascript" src="http://tux.valour.me/lib/jquery/jquery-2.1.1.js"></script>
-  <script type="application/javascript" src="data.json"></script>
+    <script type="text/javascript" src="http://tux.valour.me/lib/jquery/jquery-2.1.1.js"></script>
+    <script type="application/javascript" src="data.json"></script>
     <title>xing</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="generator" content="Google Web Designer 1.0.6.0428">
-    <link href="style2.css" rel="stylesheet" type="text/css">
+    <!-- link href="style2.css" rel="stylesheet" type="text/css" -->
+    <style type="text/css" id="" title="Temp" media="screen">
+     html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+      }
+      body {
+        -webkit-transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        -webkit-transform-style: preserve-3d;
+        
+        overflow:hidden;
+                   background: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0, #29173f),
+	color-stop(0.13, #321742),
+	color-stop(0.25, #402254),
+	color-stop(0.5, #471d4d),
+	color-stop(0.75, #633252),
+	color-stop(0.86, #7c394b),
+	color-stop(1, #e96131)
+);/* TODO: update according to top spec
+background: -o-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+background: -moz-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+background: -webkit-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+background: -ms-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+background: linear-gradient(to bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
+            */  
+      }
+      
+ img.jar {
+    display:inline;
+    position:relative;
+    z-index:500;
+}
 
+#jars_layer{
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+
+#stars_layer{
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+#star_detail{
+    display:none;
+    margin:10%;
+    width:80%;
+height:80%;
+    background-color:#fff; /*rgba(255,255,255,0.8); */
+border-color:rgba(255,255,255,0.8);
+border-style:solid;
+border-size:8px;
+border-radius:20px;
+z-index:1000;
+}
+
+#star_detail button.close {
+ float:right;
+}
+    </style>
   </head>
+  
   <body>
-      <div id="stars_layer"></div>
-	<div id="jars_layer"></div>
-	<div id="star_detail">
-	    <div class="content"></div>
-	    <button class="close">X</button>
-	</div>
-        <script type="application/javascript" src="ani.js"></script>
+    <div id="stars_layer"></div>
+    <div id="jars_layer"></div>
+    <div id="star_detail">
+      <div class="content"></div>
+      <button class="close">X</button>
+    </div>
+    <script type="application/javascript">
+/* helper functions */
+
+function random(min,max){
+    return Math.floor((Math.random() * max) + min);
+}
+
+function findMatch(array,key,value){
+    var result = null;
+    var len = array.length;
+    for(var i=0; i<len; i++){
+        if(array[i][key]===value){
+            result = array[i];
+            break;
+        }
+    }
+    return result;
+}
+
+
+jQuery.fn.calcbox = function(){
+    var box = {};
+   var offset = $(this).offset();
+   box.x = offset.left;
+   box.y = offset.top;
+   box.w = $(this).width();
+   box.h = $(this).height();
+   box.c = {'x': box.x+(box.w/2) , 'y': box.y+(box.h/2)};
+   return box;
+};
+
+/* global variables */
+var settings = {
+	screen_width : window.innerWidth,
+	screen_height : window.innerHeight,
+	jar_width: 0,
+	jar_height: 0,
+	jar_padding: 0 ,
+	max_width: 3840,
+	max_height:2160
+};
+var jars = [];
+var stars = [];
+/* 0 = jar selectable
+ 1 = star detail */
+var click_mode = 0; 
+
+/* objects */
+function Jar(options){
+	this.id = options.id ||  "";
+	this.selected = false;
+}
+
+Jar.prototype.select = function(){
+    this.selected = true;
+    $('#'+this.id).animate({'top':'0'},500, 'linear', function(){
+        //TODO: take out stars
+    });
+};
+
+Jar.prototype.deselect = function(){
+    this.selected = false;
+    $('#'+this.id).css('top',(settings.jar_width*0.4)+'px');
+    
+    //TODO: put away stars
+};
+
+Jar.prototype.attach = function(jq){
+     $('#jars_layer').append(jq);
+     jars.push(this);
+     var self = this;
+     jq.click(function(evt){
+         if(self.selected || click_mode==1){
+             return;
+         }
+         
+         var prevJar = findMatch(jars,'selected',true);
+         if(prevJar!==null){
+             prevJar.deselect();
+         }
+         
+         self.select();
+     });
+};
+
+function Star(options){
+    this.x = options.x || 0;
+    this.y = options.y || 0;
+    this.id = options.id || "";
+    this.selected = false;
+}
+
+Star.prototype.select = function(){
+    this.selected = true;
+    $('#star_detail').show();
+    var star = $('#'+this.id).detach();
+    $('#star_detail').prepend(star);
+    $('#'+this.id).animo({animation: "spinner", iterate: "infinite"});
+    $('#stars_layer img').animo('blur', {duration: 1, amount: 20});
+      $('#jars_layer img').animo('blur', {duration: 1, amount: 20});
+
+    var place = $('#'+this.id).calcbox();
+    $('#'+this.id).animate({'top':place.h/2, 'left':place.w/2}, 1000, function(){
+        $('#'+this.id).animo("cleanse");
+    });
+    click_mode = 1;
+    $('#star_detail button.close').click(this.deselect);
+};
+
+Star.prototype.deselect = function(){
+    this.selected = false;
+	$('#'+this.id).animo("cleanse");
+	var star = $('#'+this.id).detach();
+	$('#stars_layer').append(star);
+	$('#star_detail').hide();
+	$('#stars_layer img').animo("cleanse");
+	$('#'+this.id).css('left',this.x+'px');
+	$('#'+this.id).css('top',this.y+'px');
+	$('#jars_layer img').animo("cleanse");
+$('#star_detail button.close').unbind('click');
+click_mode = 0;	
+
+};
+
+
+Star.prototype.attach = function(jq){
+    $('#stars_layer').append(jq);
+     stars.push(this);
+     
+     var self = this;
+     jq.click(function(evt){
+         if(self.selected || click_mode==1){
+             return;
+         }
+         var prevStar = findMatch(stars,'selected',true);
+         if(prevStar!=null){
+             prevStar.deselect();
+         }
+         self.select();
+     });
+
+};
+
+/* functions */
+function setSizes(){
+	settings.screen_width = window.innerWidth;
+	settings.screen_height = window.innerHeight;
+	settings.jar_width = settings.screen_width*0.16;
+	settings.jar_padding = settings.screen_width*0.13;
+	
+	console.log(settings.jar_width+' '+settings.jar_padding);
+	for(var i=0; i<jars.length; i++){
+        var img = $('#'+jars[i].id);
+        img.css('width',settings.jar_width+'px');
+        img.css('margin-left',settings.jar_padding+'px');
+        if(!jars[i].selected){
+            img.css('top',(settings.jar_width*0.4)+'px');   
+        }
+	}
+}
+
+function makeJars(){
+    var img_prefix = 'images/';
+    if(settings.jar_width>500){
+        img_prefix = 'images/half';
+    }
+    
+    var jarsLen = data.jars.length;
+    for(var i=0; i<jarsLen; i++){
+        var jardata = data.jars[i];
+        
+        var imgURL = img_prefix+jardata.url;
+         var img = $('<img src="'+imgURL+'"/>');
+         img.addClass('jar');
+             var id = 'jar_'+jardata.title;
+             img.attr('id',id);
+             img.css('width',settings.jar_width+'px');
+             img.css('height','auto');
+             img.css('margin-left',settings.jar_padding+'px');
+             img.css('top',(settings.jar_width*0.4)+'px');
+             var jar = new Jar({id:id});
+             jar.attach(img);
+            if(jardata.title==='software'){
+                jar.select();
+            }
+    }
+}
+
+function makeStars(){
+    var half = false;
+    var img_prefix;
+    if(settings.screen_width<(settings.max_width/2)){
+        half = true;
+        img_prefix = 'images/halfstar-';
+    } else {
+        img_prefix = 'images/star-';
+    }
+    
+    var xFactor = (settings.screen_width/(settings.max_width/2));
+    var yFactor = (settings.screen_height/(settings.max_height/2));
+    
+    for(var i in data.stars){
+        console.log(i);
+        var starsLen = data.stars[i].length;
+        for(var j=0; j<starsLen; j++){
+            var stardata = data.stars[i][j];
+            var url = img_prefix+stardata.title+'.png';
+                var img = $('<img src="'+url+'" />');
+                img.addClass('star');
+                var id = "star_"+stardata.title;
+                img.attr('id',id);
+                
+                img.css('z-index',(100+j));
+                var left = stardata.x;
+                var top = stardata.y;
+                if(half){
+                    left *= 0.5*xFactor;
+                    top *= 0.5*yFactor;
+                }
+                img.css('left',left+'px');
+                img.css('top',top+'px');
+               // img.css('transform','scale('+xFactor+','+yFactor+')');
+                var star = new Star({'id':id, 'x':left, 'y':top});
+                star.attach(img);
+                img.load(function(){
+                    console.log(this);
+                    var w = $(this).width()*xFactor;
+                    var h = $(this).height()*yFactor;
+                    $(this).css('width', w +'px');
+                    $(this).css('height', h +'px');
+                });
+        } //end of stars
+    } // end of grouping
+    
+}
+
+/* intialize */
+(function(){
+    setSizes();
+    
+    //stars imit
+    makeJars();
+    
+    // stars init  makeStars();
+
+})();
+
+window.onresize = setSizes;
+
+                            
+    </script>
   </body>
 
 </html>
