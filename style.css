@@ -1,4 +1,4 @@
-            body {
+                                                                            body {
                 overflow:hidden;
                    background: -webkit-gradient(
 	linear,
@@ -19,6 +19,10 @@ background: -ms-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
 background: linear-gradient(to bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
             */    }
 
+
+svg{
+z-index:10;
+}
 img.jar {
     display:inline;
     position:relative;
@@ -30,3 +34,38 @@ img.jar {
     bottom:0;
     left:0;
 }
+
+.halfstar {
+    -ms-transform: scale(0.5,0.5); /* IE 9 */
+    -webkit-transform: scale(0.5,0.5); /* Chrome, Safari, Opera */
+    transform: scale(0.5,0.5);
+}
+
+.star {
+    position:absolute;
+}
+
+#stars_layer{
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+#star_detail{
+    display:none;
+    margin:10%;
+    width:80%;
+height:80%;
+    background-color:#fff; /*rgba(255,255,255,0.8); */
+border-color:rgba(255,255,255,0.8);
+border-style:solid;
+border-size:8px;
+border-radius:20px;
+z-index:1000;
+}
+
+#star_detail button.close {
+ float:right;
+}
+                            
+                            

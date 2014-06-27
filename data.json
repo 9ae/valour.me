@@ -3,5 +3,16 @@ var data = { "jars":
 	{"title": "software", "url":"jar-software.png"},
 	{"title": "me", "url":"jar-me.png"},
 	{"title": "artwork", "url":"jar-artwork.png"}
-]
+],
+"stars":{
+    "software":[
+    	{"title":"aed", "x":44, "y":420},
+    	{"title":"pyview","x":330, "y":900},
+    	{"title":"bowls","x":916,"y":136},
+        {"title":"sparks","x":1970,"y":980},
+        {"title":"vmw","x":2292,"y":72},
+        {"title":"vmc","x":2600,"y":824},
+        {"title":"words","x":3184,"y":360}
+    ]
+}
 }
