@@ -1,7 +1,19 @@
-                                /* helper functions */
+/* helper functions */
 
 function random(min,max){
     return Math.floor((Math.random() * max) + min);
+}
+
+function findMatch(array,key,value){
+    var result = null;
+    var len = array.length;
+    for(var i=0; i<len; i++){
+        if(array[i][key]===value){
+            result = array[i];
+            break;
+        }
+    }
+    return result;
 }
 
 
@@ -18,13 +30,13 @@ jQuery.fn.calcbox = function(){
 
 /* global variables */
 var settings = {
-	screen_width : window.innerWidth,
-	screen_height : window.innerHeight,
-	jar_width: 0,
-	jar_height: 0,
-	jar_padding: 0 ,
-	max_width: 3840,
-	max_height:2160
+    screen_width : window.innerWidth,
+    screen_height : window.innerHeight,
+    jar_width: 0,
+    jar_height: 0,
+    jar_padding: 0 ,
+    max_width: 3840,
+    max_height:2160
 };
 var jars = [];
 var stars = [];
@@ -34,8 +46,8 @@ var click_mode = 0;
 
 /* objects */
 function Jar(options){
-	this.id = options.id ||  "";
-	this.selected = false;
+    this.id = options.id ||  "";
+    this.selected = false;
 }
 
 Jar.prototype.select = function(){
@@ -52,6 +64,24 @@ Jar.prototype.deselect = function(){
     //TODO: put away stars
 };
 
+Jar.prototype.attach = function(jq){
+     $('#jars_layer').append(jq);
+     jars.push(this);
+     var self = this;
+     jq.click(function(evt){
+         if(self.selected || click_mode==1){
+             return;
+         }
+         
+         var prevJar = findMatch(jars,'selected',true);
+         if(prevJar!==null){
+             prevJar.deselect();
+         }
+         
+         self.select();
+     });
+};
+
 function Star(options){
     this.x = options.x || 0;
     this.y = options.y || 0;
@@ -61,92 +91,74 @@ function Star(options){
 
 Star.prototype.select = function(){
     this.selected = true;
-    $('#star_detail').show();
+
     var star = $('#'+this.id).detach();
     $('#star_detail').prepend(star);
     $('#'+this.id).animo({animation: "spinner", iterate: "infinite"});
-    $('#stars_layer img').animo('blur', {duration: 1, amount: 20});
-      $('#jars_layer img').animo('blur', {duration: 1, amount: 20});
+    $('#stars_layer img').animo('blur');
+      $('#jars_layer img').animo('blur');
 
     var place = $('#'+this.id).calcbox();
     $('#'+this.id).animate({'top':place.h/2, 'left':place.w/2}, 1000, function(){
         $('#'+this.id).animo("cleanse");
     });
     click_mode = 1;
+    var det = $('#star_detail').detach();
+    $('svg:last').after(det);
     $('#star_detail button.close').click(this.deselect);
+    $('#star_detail').show();
 };
 
 Star.prototype.deselect = function(){
     this.selected = false;
-	$('#'+this.id).animo("cleanse");
-	var star = $('#'+this.id).detach();
-	$('#stars_layer').append(star);
-	$('#star_detail').hide();
-	$('#stars_layer img').animo("cleanse");
-	$('#'+this.id).css('left',this.x+'px');
-	$('#'+this.id).css('top',this.y+'px');
-	$('#jars_layer img').animo("cleanse");
+    $('#'+this.id).animo("cleanse");
+    var star = $('#'+this.id).detach();
+    $('#stars_layer').append(star);
+    $('#star_detail').hide();
+    $('#stars_layer img').animo("focus");
+    $('#'+this.id).css('left',this.x+'px');
+    $('#'+this.id).css('top',this.y+'px');
+    $('#jars_layer img').animo("focus");
 $('#star_detail button.close').unbind('click');
-click_mode = 0;	
+click_mode = 0; 
+
+};
+
+
+Star.prototype.attach = function(jq){
+    $('#stars_layer').append(jq);
+     stars.push(this);
+     
+     var self = this;
+     jq.click(function(evt){
+         if(self.selected || click_mode==1){
+             return;
+         }
+         var prevStar = findMatch(stars,'selected',true);
+         if(prevStar!=null){
+             prevStar.deselect();
+         }
+         self.select();
+     });
 
 };
 
 /* functions */
 function setSizes(){
-	settings.screen_width = window.innerWidth;
-	settings.screen_height = window.innerHeight;
-	settings.jar_width = settings.screen_width*0.16;
-	settings.jar_padding = settings.screen_width*0.13;
-	
-	console.log(settings.jar_width+' '+settings.jar_padding);
-	for(var i=0; i<jars.length; i++){
+    settings.screen_width = window.innerWidth;
+    settings.screen_height = window.innerHeight;
+    settings.jar_width = settings.screen_width*0.16;
+    settings.jar_padding = settings.screen_width*0.13;
+    
+    console.log(settings.jar_width+' '+settings.jar_padding);
+    for(var i=0; i<jars.length; i++){
         var img = $('#'+jars[i].id);
         img.css('width',settings.jar_width+'px');
         img.css('margin-left',settings.jar_padding+'px');
         if(!jars[i].selected){
             img.css('top',(settings.jar_width*0.4)+'px');   
         }
-	}
-}
-
-function addJar(obj, jq){
-     $('#jars_layer').append(jq);
-     jars.push(obj);
-     
-     jq.click(function(evt){
-         if(obj.selected || click_mode==1){
-             return;
-         }
-         
-         var prevJar = getSelectedJar();
-         if(prevJar!==null){
-             prevJar.deselect();
-         }
-         
-         obj.select();
-     });
-}
-
-function findJar(id){
-    var result = null;
-    for(var i=0; i<jars.length; i++){
-        if(jars[i].id===id){
-            result = jars[i];
-            break;
-        }
     }
-    return result;
-}
-
-function getSelectedJar(){
-        var result = null;
-    for(var i=0; i<jars.length; i++){
-        if(jars[i].selected){
-            result = jars[i];
-            break;
-        }
-    }
-    return result;
 }
 
 function makeJars(){
@@ -169,39 +181,11 @@ function makeJars(){
              img.css('margin-left',settings.jar_padding+'px');
              img.css('top',(settings.jar_width*0.4)+'px');
              var jar = new Jar({id:id});
-             addJar(jar,img);
+             jar.attach(img);
             if(jardata.title==='software'){
                 jar.select();
             }
     }
-}
-
-function addStar(obj, jq){
-     $('#stars_layer').append(jq);
-     stars.push(obj);
-     
-     jq.click(function(evt){
-         console.log(obj.id+' click');
-         if(obj.selected || click_mode==1){
-             return;
-         }
-         var prevStar = getSelectedStar();
-         if(prevStar!=null){
-             prevStar.deselect();
-         }
-         obj.select();
-     });
-}
-
-function getSelectedStar(){
-    var result = null;
-    for(var i=0; i<jars.length; i++){
-        if(stars[i].selected){
-            result = stars[i];
-            break;
-        }
-    }
-    return result;
 }
 
 function makeStars(){
@@ -239,7 +223,7 @@ function makeStars(){
                 img.css('top',top+'px');
                // img.css('transform','scale('+xFactor+','+yFactor+')');
                 var star = new Star({'id':id, 'x':left, 'y':top});
-                addStar(star,img);
+                star.attach(img);
                 img.load(function(){
                     console.log(this);
                     var w = $(this).width()*xFactor;
@@ -260,10 +244,10 @@ function makeStars(){
     makeJars();
     
     // stars init
-    makeStars();
+      makeStars();
 
 })();
 
 window.onresize = setSizes;
 
-                            
+    
