@@ -49,6 +49,7 @@ var click_mode = 0;
 function Jar(options){
     this.id = options.id ||  "";
 		this.name = options.name || "";
+		this.total = 0;
     this.selected = false;
 		this.entrance = {x:0, y:0};
 }
@@ -66,13 +67,22 @@ Jar.prototype.deselect = function(){
 		var tow = settings.jarred_star_size + 'px';
 		var tox = this.entrance.x +'px';
 		var toy = this.entrance.y +'px';
-		$('img.star.'+this.name).each(function(index,element){
+	/*	$('img.star.'+this.name).each(function(index,element){
 			var place = $('#'+element.id).calcbox();
 			var toh = ( (settings.jarred_star_size*place.h)/place.w )+'px';
 			$(element).animate({'width':tow, 'height':toh, 'left':tox, 'top':toy}, 'fast');
-		});
+		}); */
 
-		// $('#'+this.id).css('top',(settings.jar_width*0.4)+'px');
+		var s = $('img.star.'+this.name);
+		for(var i=0; i<s.length; i++){
+			var element = s[i];
+			var place = $('#'+element.id).calcbox();
+			var toh = ( (settings.jarred_star_size*place.h)/place.w )+'px';
+			$(element).animate({'width':tow, 'height':toh, 'left':tox, 'top':toy}, 'slow');
+		}
+
+		 $('#'+this.id).css('top',(settings.jar_width*0.4)+'px');
+		 $('img.star.'+this.name).css('top',(settings.jar_width*0.4)+'px');
 };
 
 Jar.prototype.attach = function(jq){
@@ -229,6 +239,10 @@ function makeStars(){
     
     for(var i in data.stars){
         var starsLen = data.stars[i].length;
+				var jar = findMatch(jars,'name',i);
+				if(jar!=null){
+					jar.total = starsLen;				
+				}
         for(var j=0; j<starsLen; j++){
             var stardata = data.stars[i][j];
             var url = img_prefix+stardata.title+'.png';
