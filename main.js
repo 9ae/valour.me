@@ -93,18 +93,23 @@ Star.prototype.select = function(){
     this.selected = true;
 
     var star = $('#'+this.id).detach();
-    $('#star_detail').prepend(star);
+		$('#star_detail').prepend(star);
     $('#'+this.id).animo({animation: "spinner", iterate: "infinite"});
-   // $('#stars_layer img').animo('blur');
+    $('#stars_layer img').animo('blur');
     $('#jars_layer img').animo('blur');
 
     var place = $('#'+this.id).calcbox();
-    $('#'+this.id).animate({'top':place.h/2, 'left':place.w/2}, 1000, function(){
+		var toff = '-'+place.h/2+'px';
+		var loff = '-'+place.w/2+'px';
+    $('#'+this.id).animate({'top':toff, 'left':loff}, 1000, function(){
         $('#'+this.id).animo("cleanse");
     });
     click_mode = 1;
-    $('#star_detail button.close').click(this.deselect);
-    $('#star_detail').show();
+		var self = this;
+    $('#star_detail button.close').click(function(){
+			self.deselect();
+		});
+    $('#star_detail').fadeIn('slow');
 };
 
 Star.prototype.deselect = function(){
@@ -112,12 +117,14 @@ Star.prototype.deselect = function(){
     $('#'+this.id).animo("cleanse");
     var star = $('#'+this.id).detach();
     $('#stars_layer').append(star);
-    $('#star_detail').hide();
     $('#stars_layer img').animo("focus");
     $('#'+this.id).css('left',this.x+'px');
     $('#'+this.id).css('top',this.y+'px');
     $('#jars_layer img').animo("focus");
-$('#star_detail button.close').unbind('click');
+		$('#star_detail button.close').unbind('click');
+		$('#star_detail').fadeTo('slow',0, function(){
+			$(this).css({'display':'none','opacity':''});
+		});
 click_mode = 0; 
 
 };
@@ -148,7 +155,6 @@ function setSizes(){
     settings.jar_width = settings.screen_width*0.16;
     settings.jar_padding = settings.screen_width*0.13;
     
-    console.log(settings.jar_width+' '+settings.jar_padding);
     for(var i=0; i<jars.length; i++){
         var img = $('#'+jars[i].id);
         img.css('width',settings.jar_width+'px');
@@ -157,6 +163,8 @@ function setSizes(){
             img.css('top',(settings.jar_width*0.4)+'px');   
         }
     }
+
+		//TODO: stars resize
 }
 
 function makeJars(){
@@ -200,7 +208,6 @@ function makeStars(){
     var yFactor = (settings.screen_height/(settings.max_height/2));
     
     for(var i in data.stars){
-        console.log(i);
         var starsLen = data.stars[i].length;
         for(var j=0; j<starsLen; j++){
             var stardata = data.stars[i][j];
@@ -219,13 +226,11 @@ function makeStars(){
                 }
                 img.css('left',left+'px');
                 img.css('top',top+'px');
-               // img.css('transform','scale('+xFactor+','+yFactor+')');
                 var star = new Star({'id':id, 'x':left, 'y':top});
                 star.attach(img);
                 img.load(function(){
-                    console.log(this);
                     var w = $(this).width()*xFactor;
-                    var h = $(this).height()*yFactor;
+                    var h = $(this).height()*xFactor;
                     $(this).css('width', w +'px');
                     $(this).css('height', h +'px');
                 });
