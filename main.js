@@ -36,7 +36,8 @@ var settings = {
     jar_height: 0,
     jar_padding: 0 ,
     max_width: 3840,
-    max_height:2160
+    max_height:2160,
+		jarred_star_size:0,
 };
 var jars = [];
 var stars = [];
@@ -47,7 +48,9 @@ var click_mode = 0;
 /* objects */
 function Jar(options){
     this.id = options.id ||  "";
+		this.name = options.name || "";
     this.selected = false;
+		this.entrance = {x:0, y:0};
 }
 
 Jar.prototype.select = function(){
@@ -59,15 +62,28 @@ Jar.prototype.select = function(){
 
 Jar.prototype.deselect = function(){
     this.selected = false;
-    $('#'+this.id).css('top',(settings.jar_width*0.4)+'px');
     
-    //TODO: put away stars
+		var tow = settings.jarred_star_size + 'px';
+		var tox = this.entrance.x +'px';
+		var toy = this.entrance.y +'px';
+		$('img.star.'+this.name).each(function(index,element){
+			var place = $('#'+element.id).calcbox();
+			var toh = ( (settings.jarred_star_size*place.h)/place.w )+'px';
+			$(element).animate({'width':tow, 'height':toh, 'left':tox, 'top':toy}, 'fast');
+		});
+
+		// $('#'+this.id).css('top',(settings.jar_width*0.4)+'px');
 };
 
 Jar.prototype.attach = function(jq){
      $('#jars_layer').append(jq);
      jars.push(this);
      var self = this;
+		jq.load(function(){
+		 var place = $(this).calcbox();
+		 self.entrance.x = place.x + place.x/2;
+		 self.entrance.y = $(this).parent().offset().top;
+		});
      jq.click(function(evt){
          if(self.selected || click_mode==1){
              return;
@@ -155,6 +171,9 @@ function setSizes(){
     settings.jar_width = settings.screen_width*0.16;
     settings.jar_padding = settings.screen_width*0.13;
     
+		var hexagonSide = settings.jar_width / (2*Math.sin(Math.PI/3));
+		settings.jarred_star_size = hexagonSide/3;
+
     for(var i=0; i<jars.length; i++){
         var img = $('#'+jars[i].id);
         img.css('width',settings.jar_width+'px');
@@ -162,6 +181,7 @@ function setSizes(){
         if(!jars[i].selected){
             img.css('top',(settings.jar_width*0.4)+'px');   
         }
+				//TODO: relocate entrance
     }
 
 		//TODO: stars resize
@@ -186,7 +206,7 @@ function makeJars(){
              img.css('height','auto');
              img.css('margin-left',settings.jar_padding+'px');
              img.css('top',(settings.jar_width*0.4)+'px');
-             var jar = new Jar({id:id});
+             var jar = new Jar({id:id, name:jardata.title});
              jar.attach(img);
             if(jardata.title==='software'){
                 jar.select();
@@ -214,6 +234,7 @@ function makeStars(){
             var url = img_prefix+stardata.title+'.png';
                 var img = $('<img src="'+url+'" />');
                 img.addClass('star');
+								img.addClass(i);
                 var id = "star_"+stardata.title;
                 img.attr('id',id);
                 
