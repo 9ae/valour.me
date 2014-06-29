@@ -19,20 +19,18 @@ background: -ms-linear-gradient(bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
 background: linear-gradient(to bottom, #6749DE 0%, #FFBD8A 70%, #FFFFFF 100%);
             */    }
 
-
-svg{
-z-index:10;
-}
 img.jar {
     display:inline;
     position:relative;
-    z-index:500;
+
 }
 
 #jars_layer{
     position:absolute;
     bottom:0;
     left:0;
+    z-index: 0;
+    display: block;
 }
 
 .halfstar {
@@ -49,6 +47,8 @@ img.jar {
     position:absolute;
     top:0;
     left:0;
+    z-index:1;
+     display: block;
 }
 
 #star_detail{
@@ -61,7 +61,7 @@ border-color:rgba(255,255,255,0.8);
 border-style:solid;
 border-size:8px;
 border-radius:20px;
-z-index:1000;
+z-index:2000;
 }
 
 #star_detail button.close {

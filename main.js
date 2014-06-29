@@ -95,16 +95,14 @@ Star.prototype.select = function(){
     var star = $('#'+this.id).detach();
     $('#star_detail').prepend(star);
     $('#'+this.id).animo({animation: "spinner", iterate: "infinite"});
-    $('#stars_layer img').animo('blur');
-      $('#jars_layer img').animo('blur');
+   // $('#stars_layer img').animo('blur');
+    $('#jars_layer img').animo('blur');
 
     var place = $('#'+this.id).calcbox();
     $('#'+this.id).animate({'top':place.h/2, 'left':place.w/2}, 1000, function(){
         $('#'+this.id).animo("cleanse");
     });
     click_mode = 1;
-    var det = $('#star_detail').detach();
-    $('svg:last').after(det);
     $('#star_detail button.close').click(this.deselect);
     $('#star_detail').show();
 };
@@ -212,7 +210,7 @@ function makeStars(){
                 var id = "star_"+stardata.title;
                 img.attr('id',id);
                 
-                img.css('z-index',(100+j));
+            //    img.css('z-index',(100+j));
                 var left = stardata.x;
                 var top = stardata.y;
                 if(half){
