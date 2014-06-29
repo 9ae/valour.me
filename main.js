@@ -210,7 +210,7 @@ function makeStars(){
                 var id = "star_"+stardata.title;
                 img.attr('id',id);
                 
-            //    img.css('z-index',(100+j));
+                img.css('z-index',(100+j));
                 var left = stardata.x;
                 var top = stardata.y;
                 if(half){
