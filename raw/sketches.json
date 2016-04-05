@@ -1,0 +1,42 @@
+{
+	"about": "Proof of concepts, fun demos and experiments.",
+	"sketches": [
+		{
+			"title": "The Spark still Tries",
+			"about": "An experiment to test game play difficulty as it is increased within a single level.",
+			"splash_image": "",
+			"demo": "http://www.tux.valour.me/spark/",
+			"tags": [],
+			"display": true
+		}, {
+			"title": "",
+			"about": "",
+			"splash_image": "",
+			"demo": "",
+			"tags": [],
+			"display": false
+		}, {
+			"title": "",
+			"about": "",
+			"splash_image": "",
+			"demo": "",
+			"tags": [],
+			"display": false
+		}, {
+			"title": "",
+			"about": "",
+			"splash_image": "",
+			"demo": "",
+			"tags": [],
+			"display": false
+		}, {
+			"title": "",
+			"about": "",
+			"splash_image": "",
+			"demo": "",
+			"tags": [],
+			"display": false
+		}
+
+	]
+}

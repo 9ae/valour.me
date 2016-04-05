@@ -1,0 +1,65 @@
+{
+	"about": "(non-software) graphic/industrial design projects",
+	"posters": [
+		{
+			"title": "Irving Haunted House",
+			"about": "",
+			"image": "irv_haunted.png",
+			"display": true
+		},
+		{
+			"title": "Alan Turing's Later Life",
+			"about": "LGBTQ Month event",
+			"image": "cha_lgbt.jpg",
+			"display": true
+		},
+		{
+			"title": "K'nex Building Contest",
+			"about": "",
+			"image": "irv_knex1.png",
+			"display": true,
+		},
+		{
+			"title": "PHD Movie Screening",
+			"about": "GSO brings the Piled Higher Deeper movie to Stony Brook",
+			"image": "gso_phdmovie1.jpg",
+			"display": true
+		},
+	],
+	"3d": [
+		{
+			"title": "Saturn",
+			"about": "Made in Maya",
+			"image": "325maya02.jpg",
+			"display": true
+		},
+		{
+			"title": "Intertwined",
+			"about": "made in Maya",
+			"image": "325maya03.png",
+			"display": true
+		},
+	],
+	"industrial": [
+		{
+			"title": "Home",
+			"about": "Turned a $10 Ikea lamp into something that will remind me of home, while I was working in Northern Virginia",
+			"image": "lampshade.png",
+			"display": true
+		}, {
+			"title": "Piggy Bank",
+			"about": "Why buy a piggy bank? It might cost more than the money you save inside it.",
+			"image": "piggybank.jpg",
+			"display": true
+		}
+	],
+	"photo": [],
+	"photo_manip": [
+		{
+			"title": "Hello World",
+			"about": "Winning entry to Mendelsohn's Photoshop 2008 contest",
+			"image": "psc2.jpg",
+			"display": true
+		}
+	]
+}
